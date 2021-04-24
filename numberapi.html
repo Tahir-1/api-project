@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NumberFact</title>
+</head>
+<body bgcolor="grey">
+    <style>
+        .container{
+            background-color: aqua;
+            margin:auto;
+            margin-top: 50px;
+            padding:20px;
+            width:60%;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        #fact{
+            display:none;
+        }
+
+    </style>
+
+
+    <div class = "container">
+      <h2>Number Facts</h2>
+      <p>Enter a Number to get a Fact</p>
+      <input type="number" id="numberinput" placeholder="Enter Any Number... .">
+      <div id="fact" >
+       <h4>Number Fact</h4>
+       <p id=FactText></p>
+      </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            console.log('Working')
+        }, 100);
+        let fact = document.querySelector('#fact')
+        let numberinput = document.querySelector('#numberinput')
+        let FactText = document.querySelector('#FactText')
+        numberinput.addEventListener('input',getFact)
+
+        function getFact() {
+            let number = numberinput.value ;
+
+            fetch('http://numbersapi.com/'+ number )
+            .then(response => response.text())
+            .then (data => {
+
+                if(number !=""){
+                    console.log(data);
+                    fact.style.display= 'block';
+                FactText.innerText = data;
+                }
+            })
+            .catch (err => console.log(error))
+        }
+    </script>
+</body>
+</html>
