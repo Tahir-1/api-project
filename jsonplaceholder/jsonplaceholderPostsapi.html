@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON - Placeholder </title>
+</head>
+<body bgcolor="silver">
+    <style>
+        .container{
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color:rgb(44, 91, 153);
+            width:60vw;
+            padding: 20px;
+            text-align: center;
+            color: whitesmoke;
+        }
+
+        .button1{
+            border: none;
+        }
+
+        .listcontainer{
+            margin: auto;
+            color: whitesmoke;
+            width: 80vw;
+        }
+
+        h2{
+            color: black;
+            margin-left: 44%;
+        }
+
+        .ulcontainer{
+            margin-bottom: 10px;
+            background-color:teal;
+            padding: 10px;
+        }
+
+        
+
+    </style>
+<div class="container">
+    <h1>Get JSON</h1>
+    <button class="button1" id="getJson">JSON</button>
+</div>   
+<div class="listcontainer">
+    <p id="posts" class="list"></p>
+</div>
+<script>
+ document.getElementById("getJson").addEventListener('click',getJson)
+
+ function getJson(){
+     fetch('https://jsonplaceholder.typicode.com/posts/')
+     .then((res) => res.json())
+     .then((data)=>{
+        let output = '<h2 class="listh2"> posts</h2>'
+        data.forEach(function(post) {
+            output +=`
+                <ul type="none" class="ulcontainer">
+                 <li>post id: ${post.id}</li>
+                 <li>post title: ${post.title}</li>
+                 <li>post body: ${post.body}</li>
+                </ul>                    
+            `;
+        });
+        document.getElementById('posts').innerHTML= output  ;
+     })
+ }
+</script>
+</body>
+</html>
